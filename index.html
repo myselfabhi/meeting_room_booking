@@ -1,120 +1,314 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Meeting Room Booking Portal</title>
-  <style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Meeting Room Booking Portal</title>
+<style>
+
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f7f8;
-      padding: 20px;
-    }
 
+      font-family: 'Segoe UI', sans-serif;
+
+      background: linear-gradient(to right, #f2f8ff, #e6ecff);
+
+      padding: 40px;
+
+      margin: 0;
+
+    }
+ 
     .container {
-      max-width: 520px;
+
+      max-width: 600px;
+
+      background: #ffffff;
+
       margin: auto;
-      background: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 12px rgba(0,0,0,0.1);
-    }
 
-    h2 {
+      padding: 30px 40px;
+
+      border-radius: 16px;
+
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+    }
+ 
+    h2, h3 {
+
       text-align: center;
-      margin-bottom: 20px;
-      color: #333;
-    }
 
+      color: #3a3a60;
+
+    }
+ 
     label {
+
+      font-weight: 600;
+
+      color: #333;
+
       display: block;
-      margin: 15px 0 5px;
-      font-weight: bold;
-    }
 
-    input, select, button {
+      margin: 15px 0 6px;
+
+    }
+ 
+    input, select {
+
       width: 100%;
-      padding: 10px;
-      margin-top: 5px;
+
+      padding: 12px;
+
       border: 1px solid #ccc;
-      border-radius: 8px;
-    }
 
+      border-radius: 10px;
+
+      font-size: 15px;
+
+      transition: border-color 0.3s;
+
+    }
+ 
+    input:focus, select:focus {
+
+      border-color: #6c63ff;
+
+      outline: none;
+
+    }
+ 
     button {
-      background-color: #007bff;
+
+      margin-top: 25px;
+
+      width: 100%;
+
+      padding: 14px;
+
+      background: linear-gradient(to right, #6c63ff, #7b8dfd);
+
       color: white;
+
       border: none;
-      margin-top: 20px;
+
+      border-radius: 10px;
+
+      font-size: 16px;
+
+      font-weight: bold;
+
       cursor: pointer;
-    }
 
+      transition: background 0.3s;
+
+    }
+ 
     button:hover {
-      background-color: #0056b3;
-    }
 
-    .success-message {
-      text-align: center;
-      color: green;
-      margin-top: 15px;
+      background: linear-gradient(to right, #5c53ef, #6f7dfd);
+
     }
-  </style>
+ 
+    .success-message, .error-message {
+
+      text-align: center;
+
+      margin-top: 20px;
+
+      font-weight: bold;
+
+      font-size: 14px;
+
+      padding: 10px;
+
+      border-radius: 8px;
+
+    }
+ 
+    .success-message {
+
+      color: #155724;
+
+      background-color: #d4edda;
+
+      border: 1px solid #c3e6cb;
+
+    }
+ 
+    .error-message {
+
+      color: #721c24;
+
+      background-color: #f8d7da;
+
+      border: 1px solid #f5c6cb;
+
+    }
+ 
+    #bookedSlots {
+
+      margin-top: 40px;
+
+      background: #f9f9ff;
+
+      padding: 20px;
+
+      border-radius: 10px;
+
+    }
+ 
+    #slotList li {
+
+      padding: 6px 0;
+
+      border-bottom: 1px solid #ddd;
+
+      font-size: 14px;
+
+      color: #333;
+
+    }
+ 
+    @media (max-width: 600px) {
+
+      .container {
+
+        padding: 20px;
+
+      }
+
+    }
+</style>
 </head>
 <body>
-
 <div class="container">
-  <h2>Meeting Room Booking</h2>
-  <form id="bookingForm">
-    <label for="room">Select Meeting Room</label>
-    <select id="room" name="room" required>
-      <option value="">-- Choose a Room --</option>
-      <option value="Accountability">Accountability (Capacity: 8)</option>
-      <option value="Collaboration">Collaboration (Capacity: 12)</option>
-      <option value="Respect">Respect (Capacity: 6)</option>
-      <option value="Care">Care (Capacity: 1)</option>
-    </select>
-
-    <label for="date">Select Date</label>
-    <input type="date" id="date" name="date" required>
-
-    <label for="meetingTime">Meeting Time</label>
-    <select id="meetingTime" name="meetingTime" required>
-      <option value="">-- Choose Time Slot --</option>
-      <option value="Morning (9AM - 12PM)">Morning (9AM - 12PM)</option>
-      <option value="Afternoon (12PM - 3PM)">Afternoon (12PM - 3PM)</option>
-      <option value="Evening (3PM - 6PM)">Evening (3PM - 6PM)</option>
-    </select>
-
-    <label for="start">Start Time</label>
-    <input type="time" id="start" name="start" required>
-
-    <label for="end">End Time</label>
-    <input type="time" id="end" name="end" required>
-
-    <label for="vacancy">Vacancy Status</label>
-    <select id="vacancy" name="vacancy" required>
-      <option value="">-- Select Vacancy Status --</option>
-      <option value="Vacant">Vacant</option>
-      <option value="Not Vacant">Not Vacant</option>
-    </select>
-
-    <label for="name">Booked By</label>
-    <input type="text" id="name" name="name" placeholder="Your Name" required>
-
-    <button type="submit">Book Room</button>
-    <div class="success-message" id="message"></div>
-  </form>
+<h2>Meeting Room Booking</h2>
+<form id="bookingForm">
+<label for="room">Meeting Room</label>
+<select id="room" name="room" required>
+<option value="">-- Select Room --</option>
+<option value="Accountability">Accountability (Capacity: 8)</option>
+<option value="Collaboration">Collaboration (Capacity: 12)</option>
+<option value="Respect">Respect (Capacity: 6)</option>
+<option value="Care">Care (Capacity: 1)</option>
+</select>
+ 
+      <label for="date">Date</label>
+<input type="date" id="date" name="date" required />
+ 
+      <label for="start">Start Time</label>
+<input type="time" id="start" name="start" required />
+ 
+      <label for="end">End Time</label>
+<input type="time" id="end" name="end" required />
+ 
+      <label for="name">Booked By</label>
+<input type="text" id="name" name="name" readonly />
+ 
+      <button type="submit">Book Room</button>
+<div class="success-message" id="successMessage"></div>
+<div class="error-message" id="errorMessage"></div>
+</form>
+ 
+    <div id="bookedSlots">
+<h3>📋 Booked Slots</h3>
+<ul id="slotList" style="list-style: none; padding-left: 0;"></ul>
 </div>
+</div>
+ 
+  <script>
 
-<script>
-  document.getElementById("bookingForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-    const room = document.getElementById("room").value;
-    const vacancy = document.getElementById("vacancy").value;
-    const slot = document.getElementById("meetingTime").value;
-    document.getElementById("message").textContent = `Room "${room}" booked successfully for ${slot} (Status: ${vacancy})`;
-    this.reset();
-  });
+    const bookings = [];
+ 
+    window.onload = function () {
+
+      const userName = prompt("Please enter your name:");
+
+      document.getElementById("name").value = userName || "Unknown";
+
+    };
+ 
+    function isOverlapping(existingStart, existingEnd, newStart, newEnd) {
+
+      return (newStart < existingEnd && newEnd > existingStart);
+
+    }
+ 
+    function updateBookedSlots() {
+
+      const slotList = document.getElementById("slotList");
+
+      slotList.innerHTML = "";
+ 
+      bookings.forEach(b => {
+
+        const li = document.createElement("li");
+
+        li.textContent = `📅 ${b.date} | ⏰ ${b.start} to ${b.end} | 🏢 Room: ${b.room} | 👤 Booked by: ${b.name}`;
+
+        slotList.appendChild(li);
+
+      });
+
+    }
+ 
+    document.getElementById("bookingForm").addEventListener("submit", function (e) {
+
+      e.preventDefault();
+ 
+      const room = document.getElementById("room").value;
+
+      const date = document.getElementById("date").value;
+
+      const start = document.getElementById("start").value;
+
+      const end = document.getElementById("end").value;
+
+      const name = document.getElementById("name").value;
+ 
+      const newStart = new Date(`${date}T${start}`);
+
+      const newEnd = new Date(`${date}T${end}`);
+ 
+      const successMsg = document.getElementById("successMessage");
+
+      const errorMsg = document.getElementById("errorMessage");
+
+      successMsg.textContent = '';
+
+      errorMsg.textContent = '';
+ 
+      const conflict = bookings.find(b =>
+
+        b.room === room &&
+
+        b.date === date &&
+
+        isOverlapping(new Date(`${b.date}T${b.start}`), new Date(`${b.date}T${b.end}`), newStart, newEnd)
+
+      );
+ 
+      if (conflict) {
+
+        errorMsg.textContent = `❌ Not Available: Overlaps with booking by ${conflict.name}`;
+
+      } else {
+
+        bookings.push({ room, date, start, end, name });
+
+        successMsg.textContent = `✅ "${room}" booked for ${date} from ${start} to ${end} by ${name}`;
+
+        this.reset();
+
+        document.getElementById("name").value = name;
+
+        updateBookedSlots(); // 🆕 update display
+
+      }
+
+    });
 </script>
-
 </body>
 </html>
+
+ 
