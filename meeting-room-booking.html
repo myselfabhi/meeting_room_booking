@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meeting Room Booking Portal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7f8;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 520px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .success-message {
+      text-align: center;
+      color: green;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Meeting Room Booking</h2>
+  <form id="bookingForm">
+    <label for="room">Select Meeting Room</label>
+    <select id="room" name="room" required>
+      <option value="">-- Choose a Room --</option>
+      <option value="Accountability">Accountability (Capacity: 8)</option>
+      <option value="Collaboration">Collaboration (Capacity: 12)</option>
+      <option value="Respect">Respect (Capacity: 6)</option>
+      <option value="Care">Care (Capacity: 1)</option>
+    </select>
+
+    <label for="date">Select Date</label>
+    <input type="date" id="date" name="date" required>
+
+    <label for="meetingTime">Meeting Time</label>
+    <select id="meetingTime" name="meetingTime" required>
+      <option value="">-- Choose Time Slot --</option>
+      <option value="Morning (9AM - 12PM)">Morning (9AM - 12PM)</option>
+      <option value="Afternoon (12PM - 3PM)">Afternoon (12PM - 3PM)</option>
+      <option value="Evening (3PM - 6PM)">Evening (3PM - 6PM)</option>
+    </select>
+
+    <label for="start">Start Time</label>
+    <input type="time" id="start" name="start" required>
+
+    <label for="end">End Time</label>
+    <input type="time" id="end" name="end" required>
+
+    <label for="vacancy">Vacancy Status</label>
+    <select id="vacancy" name="vacancy" required>
+      <option value="">-- Select Vacancy Status --</option>
+      <option value="Vacant">Vacant</option>
+      <option value="Not Vacant">Not Vacant</option>
+    </select>
+
+    <label for="name">Booked By</label>
+    <input type="text" id="name" name="name" placeholder="Your Name" required>
+
+    <button type="submit">Book Room</button>
+    <div class="success-message" id="message"></div>
+  </form>
+</div>
+
+<script>
+  document.getElementById("bookingForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const room = document.getElementById("room").value;
+    const vacancy = document.getElementById("vacancy").value;
+    const slot = document.getElementById("meetingTime").value;
+    document.getElementById("message").textContent = `Room "${room}" booked successfully for ${slot} (Status: ${vacancy})`;
+    this.reset();
+  });
+</script>
+
+</body>
+</html>
