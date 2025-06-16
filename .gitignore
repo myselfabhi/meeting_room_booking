@@ -1,0 +1,35 @@
+# Node modules (server + client)
+node_modules/
+client/node_modules/
+
+# Environment variables
+.env
+server/.env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build files
+client/build/
+dist/
+
+# OS/system files
+.DS_Store
+Thumbs.db
+
+# IDEs/editors
+.vscode/
+.idea/
+
+# Production logs
+logs/
+*.log
+
+# Optional: Ignore test coverage output
+coverage/
+
+# Optional: Local database files (Mongo)
+*.local
+*.lock
